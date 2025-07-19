@@ -1,0 +1,28 @@
+<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <img class="header__img" src="{{ url_for('static', filename='img/logo2.png') }}" alt="smotrish">
+    </a>
+
+    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{{ url_for('main.index') }}" class="nav-link px-2 text-secondary">Home</a></li>
+            {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('channel.create') }}" class="nav-link px-2 text-black">Add Channel</a></li>
+        <li><a href="{{ url_for('channel.all') }}" class="nav-link px-2 text-black">Channels List</a></li>
+        <li><a href="{{ url_for('pack.create') }}" class="nav-link px-2 text-black">Add Pack</a></li>
+        <li><a href="{{ url_for('pack.all') }}" class="nav-link px-2 text-black">Packs List</a></li>
+        <li><a href="{{ url_for('user.create') }}" class="nav-link px-2 text-black">Add User</a></li>
+        <li><a href="{{ url_for('user.user_list') }}" class="nav-link px-2 text-black">Users List</a></li>
+            {% endif %}
+
+    </ul>
+
+    <div class="text-end">
+        {% if current_user.is_authenticated %}
+            <span>Welcome, {{ current_user.username }}</span>
+            <a href="{{ url_for('user.logout') }}" type="button" class="btn btn-outline-info me-2">Logout</a>
+        {% else %}
+        <a href="{{ url_for('user.login_page') }}" type="button" class="btn btn-outline-dark me-2">Login</a>
+        <a href="{{ url_for('user.register') }}" class="btn btn-outline-warning">Register</a>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block title %}All Channels{% endblock %}
+
+{% block style %}
+    {% assets 'channel_all_css' %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+{% endblock %}
+
+
+{% block content %}
+<div class="table-responsive custom-table-responsive">
+  <table class="table custom-table">
+    <thead>
+        <th scope="col">Channel Number</th>
+        <th scope="col">Channel Name</th>
+        <th scope="col">Channel Description</th>
+        <th scope="col">Logo</th>
+        <th scope="col">Packet Name</th>
+        <th scope="col">Update</th>
+    </thead>
+    <tbody>
+      {% for channel in channels %}
+      <tr scope="row">
+        <td>{{ channel.number }}</td>
+        <td>{{ channel.channel_name }}</td>
+        <td>{{ channel.description }}</td>
+        <td><img width="30px" height="30px" src="{{ url_for('static', filename='uploads/' + channel.logo) }}" alt="Logo"></td>
+        <td>{{ channel.packs.pack_name }}</td>
+      {% if current_user.is_authenticated %}
+        <td>
+          <a href="{{ url_for('channel.update', id=channel.id) }}" class="btn btn-sm btn-secondary"><span class="fa fa-edit"></span></a>
+          <a href="{{ url_for('channel.delete', id=channel.id) }}" class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
+        </td>
+      {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block script %}
+	{% assets 'channel_all_js' %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}

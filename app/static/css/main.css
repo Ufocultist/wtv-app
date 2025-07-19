@@ -1,0 +1,43 @@
+@import url('fonts.css');
+.header__img {
+    display: block;
+    height: 64px;
+    width: 228px;
+}
+.page {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    flex: 1 1 auto;
+}
+
+.header{
+    position: sticky;
+    top: 0;
+    padding: 20px;
+}
+
+body {
+    background: #9ec5fe;
+
+}
+
+h1 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px;
+    background: #ffffff;
+}

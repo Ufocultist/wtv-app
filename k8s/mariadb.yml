@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  labels:
+    app: mariadb
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      containers:
+        - name: mariadb
+          image: mariadb:latest
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: ia2xw
+            - name: MYSQL_DATABASE
+              value: smotrish_db
+            - name: MYSQL_USER
+              value: smotrish_user
+            - name: MYSQL_PASSWORD
+              value: ia2xwbbyby
+            - name: MYSQL_ROOT_HOST
+              value: "%"
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mariadb-persistent-storage
+              mountPath: /var/lib/mysql
+          livenessProbe:
+              tcpSocket:
+                port: 3306
+              initialDelaySeconds: 30
+              periodSeconds: 10
+          readinessProbe:
+              tcpSocket:
+                port: 3306
+              initialDelaySeconds: 15
+              periodSeconds: 5
+      volumes:
+        - name: mariadb-persistent-storage
+          persistentVolumeClaim:
+            claimName: mariadb-pvc
+  replicas: 1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb
+  labels:
+    app: mariadb
+  namespace: dev
+spec:
+  type: ClusterIP
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+  selector:
+    app: mariadb
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-local-pv
+  namespace: dev
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/mariadb
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - w-node-01
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-pvc
+  namespace: dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi

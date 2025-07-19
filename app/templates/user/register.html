@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Register Page{% endblock %}
+
+{% block content %}
+<!--
+    <form method="post" class="form-control d-flex flex-column gap-2">
+        <table>
+            <tr>
+                <td>Login</td>
+                <td><input type="text" class="form-control" name="login"></td>
+            </tr>
+            <tr>
+                 <td>Password</td>
+                <td><input type="password" class="form-control" name="password"></td>
+            </tr>
+            <tr>
+                 <td>Retype Password</td>
+                <td><input type="password" class="form-control" name="password2"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" class="form-control" name="email"></td>
+            </tr>
+            <tr>
+                <td><button class="btn btn-success" type="submit">Register</button></td>
+            </tr>
+        </table>
+    </form> -->
+
+    <form method="post" enctype="multipart/form-data" class="form-control d-flex flex-column gap-2">
+        {{ form.csrf_token }}
+        {{ form.username(class="form-control", placeholder="Login") }}
+        {{ form.password(class="form-control", placeholder="Password") }}
+        {{ form.password2(class="form-control", placeholder="Retype Password") }}
+        {{ form.email(class="form-control", placeholder="Email") }}
+        {{ form.avatar(class="form-control") }}
+        {{ form.submit(class="btn btn-success") }}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Add User{% endblock %}
+
+{% block content %}
+<form method="post" class="form-control d-flex flex-column gap-2">
+    <input type="text" class="form-control" placeholder="Username" name="user_name">
+    <input type="password" class="form-control" placeholder="Password" name="password">
+    <input type="text" class="form-control" placeholder="Firstname(Optional)" name="firstname">
+    <input type="text" class="form-control" placeholder="Lastname(Optional)" name="lastname">
+    <input type="email" class="form-control" placeholder="Email" name="email">
+    <input type="text" class="form-control" placeholder="Plan" name="subscription">
+    <button class="btn btn-success" type="submit">Add User</button>
+</form>
+{% endblock %}

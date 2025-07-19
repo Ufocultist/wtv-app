@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block title %}All Users{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blocks/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/font-awesome.min.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="table-responsive custom-table-responsive">
+  <table class="table custom-table">
+    <thead>
+        <th scope="col">Username</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Update</th>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr scope="row">
+        <td>{{ user.username }}</td>
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td>{{ user.email }}</td>
+      {% if current_user.is_authenticated %}
+        <td>
+          <a href="{{ url_for('user.update', id=user.id) }}" class="btn btn-sm btn-secondary"><span class="fa fa-edit"></span></a>
+          <a href="{{ url_for('user.delete', id=user.id) }}" class="btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
+        </td>
+      {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

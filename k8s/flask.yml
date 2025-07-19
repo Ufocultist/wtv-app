@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask
+  labels:
+    app: flask
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
+      containers:
+        - name: flask
+          image: ufocultist/smotrish:__TAG__ #${IMAGE_NAME} #us-east1-docker.pkg.dev/org-dev-gke/smotrishapp/smotrish:cc25e32
+          env:
+            - name: DB_HOST
+              value: mariadb
+            - name: DB_NAME
+              value: smotrish_db
+            - name: DB_USERNAME
+              value: smotrish_user
+            - name: DB_PASSWORD
+              value: ia2xwbbyby
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: flask-storage
+              mountPath: /app/app/static/uploads  # Adjust the path as needed
+      imagePullSecrets:
+        - name: docker-hub-secret
+      volumes:
+      - name: flask-storage
+        persistentVolumeClaim:
+          claimName: flask-pvc  # Name of the PVC
+  replicas: 1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask
+  labels:
+    app: flask
+  namespace: dev
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: flask
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: flask-local-pv
+  namespace: dev
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/flask
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - w-node-01
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: flask-pvc
+  namespace: dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

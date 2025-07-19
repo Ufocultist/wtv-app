@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Add Pack{% endblock %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" class="form-control d-flex flex-column gap-2">
+    {{ form.csrf_token }}
+    {{ form.name(class="form-control", placeholder="Pack Name") }}
+    {{ form.description(class="form-control", placeholder="Description") }}
+    {{ form.submit(class="btn btn-success") }}
+</form>
+
+{% endblock %}

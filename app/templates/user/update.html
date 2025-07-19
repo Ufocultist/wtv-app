@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Update User = <b>"{{user.username}}"</b>{% endblock %}
+
+{% block content %}
+<form method="post" class="form-control d-flex flex-column gap-2">
+    <input value="{{ user.username }}" type="text" class="form-control" placeholder="user name" name="username">
+    <input value="{{ user.firstname }}" type="text" class="form-control" placeholder="firstname" name="firstname">
+    <input value="{{ user.lastname }}" type="text" class="form-control" placeholder="lastname" name="lastname">
+    <input value="{{ user.email }}" type="text" class="form-control" placeholder="email" name="email">
+    <button class="btn btn-success" type="submit">Save user</button>
+</form>
+{% endblock %}

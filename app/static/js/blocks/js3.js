@@ -1,0 +1,1 @@
+console.log('Hello JS3 Blocks');

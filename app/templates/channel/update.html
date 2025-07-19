@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Update Channel = <b>"{{channel.channel_name}}"</b>{% endblock %}
+
+{% block content %}
+
+<form method="post" class="form-control d-flex flex-column gap-2">
+    <input value="{{ channel.number }}" type="text" class="form-control" placeholder="channel number" name="number">
+    <input value="{{ channel.channel_name }}" type="text" class="form-control" placeholder="channel name" name="channel_name">
+    <input value="{{ channel.description }}" type="text" class="form-control" placeholder="Description" name="description">
+    <button class="btn btn-success" type="submit">Save channel</button>
+</form>
+<!--
+<form method="post" enctype="multipart/form-data" class="form-control d-flex flex-column gap-2">
+{#    {{ form.csrf_token }}#}
+{#    {{ form.number(class="form-control", placeholder="Channel Number") }}#}
+{#    {{ form.name(class="form-control", placeholder="Channel Name") }}#}
+{#    {{ form.description(class="form-control", placeholder="Description") }}#}
+{#    {{ form.logo(class="form-control") }}#}
+{#    {{ form.pack(class="form-control", placeholder="Packet Name") }}#}
+{#    {{ form.submit(class="btn btn-success") }}#}
+</form>
+-->
+{% endblock %}
