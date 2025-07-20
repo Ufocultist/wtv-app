@@ -59,3 +59,4 @@ jobs:
       cluster_name: wtv-cluster
       #image_tag: ${{ needs.python-ci.outputs.tag_version }}
     secrets: inherit
+
