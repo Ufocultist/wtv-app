@@ -63,4 +63,3 @@ jobs:
       aws_ecr: wtvapp
       image_tag: ${{ needs.python-ci.outputs.tag_version }}
     secrets: inherit
-
