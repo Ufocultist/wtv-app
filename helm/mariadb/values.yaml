@@ -16,7 +16,7 @@ persistence:
   enabled: true
   size: 1Gi
   accessMode: ReadWriteOnce
-  storageClass: gp2
+  storageClass: gp3
 
 resources: {}
 
