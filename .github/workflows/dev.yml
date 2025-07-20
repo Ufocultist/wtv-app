@@ -57,7 +57,8 @@ jobs:
     with:
       aws_account_id: 211125364139
       cluster_name: wtv-cluster
-      mariadb: true
+      nginx: true
+      mariadb: false
       #image_tag: ${{ needs.python-ci.outputs.tag_version }}
     secrets: inherit
 
