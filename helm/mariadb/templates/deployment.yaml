@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mariadb.fullname" . }}
+  labels:
+    app: {{ include "mariadb.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "mariadb.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "mariadb.name" . }}
+    spec:
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      containers:
+        - name: mariadb
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.mariadb.rootPassword | quote }}
+            - name: MYSQL_DATABASE
+              value: {{ .Values.mariadb.database | quote }}
+            - name: MYSQL_USER
+              value: {{ .Values.mariadb.user | quote }}
+            - name: MYSQL_PASSWORD
+              value: {{ .Values.mariadb.password | quote }}
+            - name: MYSQL_ROOT_HOST
+              value: {{ .Values.mariadb.rootHost | quote }}
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mariadb-storage
+              mountPath: /var/lib/mysql
+          livenessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 3306
+            initialDelaySeconds: 15
+            periodSeconds: 5
+      volumes:
+        - name: mariadb-storage
+          persistentVolumeClaim:
+            claimName: {{ include "mariadb.fullname" . }}-pvc
