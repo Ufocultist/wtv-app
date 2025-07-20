@@ -19,41 +19,42 @@ on:
 
 jobs:
 
-  wtv-ci:
-    uses: ufocultist/wtv-cicd/.github/workflows/python-ci.yml@feature/develop
-    with:
-      tag_release: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
-      app_name: wtv # app name in Cloud
-      app_file: wtv # artifact file name
-      #docker_repo: ufocultist
-      snyk_org: ufocultist-FPiwXFdC6zbfKornGL9YmJ
-      registry_type: ecr #, ecr - AWS, acr - Azure, gar - Google, Dockerhub - dockerhub
-      ###AWS###############
-      aws_ecr: wtvapp
-      aws_region: us-east-1
-      aws_account_id: 211125364139
-      ###TESTS############
-      unit_test_enable: true
-      pass_failed_unit_test: ''
-      #enable_sonar: false # flag to enable Sonar Scanning
-      #build_tool: 'poetry'
-      #test_tool: doit
-      ####################
-      build_tool: 'pip'
-      test_tool: 'pytest'
-      ####################
-      add_dep_tools: "ruff pytest build setuptools wheel" #List of additional modules to install
-      poetry_checkers: '["mypy", "pylint", "coverage"]' #List of poetry checks
-      ###DOCKER###########
-      docker_build: true # flag to build and publish the image
-      snyk_scan: false
-      #docker_build_args: '--platform=arm64'
-      #container_scan: false # flag to enable docker image scanning
-    secrets: inherit
-
-#  onprem-cd:
-#    needs: wtv-ci
-#    uses: ufocultist/wtv-cicd/.github/workflows/eks-cd.yml@feature/develop
+#  wtv-ci:
+#    uses: ufocultist/wtv-cicd/.github/workflows/python-ci.yml@feature/develop
 #    with:
-#      image_tag: ${{ needs.python-ci.outputs.tag_version }}
+#      tag_release: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+#      app_name: wtv # app name in Cloud
+#      app_file: wtv # artifact file name
+#      #docker_repo: ufocultist
+#      snyk_org: ufocultist-FPiwXFdC6zbfKornGL9YmJ
+#      registry_type: ecr #, ecr - AWS, acr - Azure, gar - Google, Dockerhub - dockerhub
+#      ###AWS###############
+#      aws_ecr: wtvapp
+#      aws_region: us-east-1
+#      aws_account_id: 211125364139
+#      ###TESTS############
+#      unit_test_enable: true
+#      pass_failed_unit_test: ''
+#      #enable_sonar: false # flag to enable Sonar Scanning
+#      #build_tool: 'poetry'
+#      #test_tool: doit
+#      ####################
+#      build_tool: 'pip'
+#      test_tool: 'pytest'
+#      ####################
+#      add_dep_tools: "ruff pytest build setuptools wheel" #List of additional modules to install
+#      poetry_checkers: '["mypy", "pylint", "coverage"]' #List of poetry checks
+#      ###DOCKER###########
+#      docker_build: true # flag to build and publish the image
+#      snyk_scan: false
+#      #docker_build_args: '--platform=arm64'
+#      #container_scan: false # flag to enable docker image scanning
 #    secrets: inherit
+
+  onprem-cd:
+#    needs: wtv-ci
+    uses: ufocultist/wtv-cicd/.github/workflows/eks-cd.yml@feature/develop
+    with:
+      aws_account_id: 211125364139
+      #image_tag: ${{ needs.python-ci.outputs.tag_version }}
+    secrets: inherit
