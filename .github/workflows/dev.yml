@@ -61,4 +61,3 @@ jobs:
       mariadb: false
       #image_tag: ${{ needs.python-ci.outputs.tag_version }}
     secrets: inherit
-
