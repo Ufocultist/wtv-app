@@ -31,6 +31,8 @@ spec:
               value: "{{ .Values.env.DB_USERNAME }}"
             - name: DB_PASSWORD
               value: "{{ .Values.env.DB_PASSWORD }}"
+            - name: SECRET_KEY
+              value: "{{ .Values.env.SECRET_KEY }}"
           volumeMounts:
             - name: flask-storage
               mountPath: /app/app/static/uploads

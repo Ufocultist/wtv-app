@@ -9,6 +9,7 @@ env:
   DB_NAME: "smotrish_db"
   DB_USERNAME: "smotrish_user"
   DB_PASSWORD: ""
+  SECRET_KEY: ""
 
 pvc:
   name: flask-pvc
