@@ -15,7 +15,13 @@ pvc:
   size: 1Gi
 
 pv:
+  enabled: true
   name: flask-local-pv
+  storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  path: /mnt/data/flask
 
 service:
   name: flask

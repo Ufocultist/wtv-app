@@ -1,21 +1,25 @@
+{{- if .Values.pv.enabled }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ .Values.pv.name }}
-  namespace: dev
+  namespace: {{ .Release.Namespace }}
 spec:
   capacity:
-    storage: {{ .Values.pvc.size }}
-  volumeMode: Filesystem
+    storage: {{ .Values.pv.storage }}
+  volumeMode: {{ .Values.pv.volumeMode }}
   accessModes:
-    - ReadWriteOnce
+{{ toYaml .Values.pv.accessModes | indent 4 }}
   hostPath:
-    path: {{ .Values.pv.hostPath }}
+    path: {{ .Values.pv.path }}
+  {{- if .Values.pv.nodeAffinity.enabled }}
   nodeAffinity:
     required:
       nodeSelectorTerms:
         - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
+            - key: {{ .Values.pv.nodeAffinity.key }}
+              operator: {{ .Values.pv.nodeAffinity.operator }}
               values:
-                - {{ .Values.pv.node }}
+{{ toYaml .Values.pv.nodeAffinity.values | indent 16 }}
+  {{- end }}
+{{- end }}
