@@ -35,10 +35,6 @@ jobs:
       ###TESTS############
       unit_test_enable: true
       pass_failed_unit_test: ''
-      #enable_sonar: false # flag to enable Sonar Scanning
-      #build_tool: 'poetry'
-      #test_tool: doit
-      ####################
       build_tool: 'pip'
       test_tool: 'pytest'
       ####################
@@ -47,18 +43,16 @@ jobs:
       ###DOCKER###########
       docker_build: true # flag to build and publish the image
       snyk_scan: false
-      #docker_build_args: '--platform=arm64'
-      #container_scan: false # flag to enable docker image scanning
     secrets: inherit
 
-  onprem-cd:
+  eks-cd:
     needs: wtv-ci
     uses: ufocultist/wtv-cicd/.github/workflows/eks-cd.yml@feature/develop
     with:
       aws_account_id: 211125364139
       cluster_name: wtv-cluster
-      nginx: false
-      mariadb: false
+      nginx: true
+      mariadb: true
       wtv: true
       aws_ecr: wtvapp
       image_tag: ${{ needs.python-ci.outputs.tag_version }}
