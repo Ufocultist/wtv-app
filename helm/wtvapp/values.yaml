@@ -5,7 +5,7 @@ image:
   tag: latest
 
 env:
-  DB_HOST: "%"
+  DB_HOST: "mariadb-mariadb"
   DB_NAME: "smotrish_db"
   DB_USERNAME: "smotrish_user"
   DB_PASSWORD: ""
