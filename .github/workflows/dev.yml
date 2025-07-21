@@ -55,5 +55,5 @@ jobs:
       mariadb: false
       wtv: true
       aws_ecr: wtvapp
-#      image_tag: ${{ needs.python-ci.outputs.tag_version }}
-#    secrets: inherit
+      image_tag: ${{ needs.python-ci.outputs.tag_version }}
+    secrets: inherit
