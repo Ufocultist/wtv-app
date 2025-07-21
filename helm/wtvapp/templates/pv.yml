@@ -12,14 +12,4 @@ spec:
 {{ toYaml .Values.pv.accessModes | indent 4 }}
   hostPath:
     path: {{ .Values.pv.path }}
-  {{- if .Values.pv.nodeAffinity.enabled }}
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: {{ .Values.pv.nodeAffinity.key }}
-              operator: {{ .Values.pv.nodeAffinity.operator }}
-              values:
-{{ toYaml .Values.pv.nodeAffinity.values | indent 16 }}
-  {{- end }}
 {{- end }}
