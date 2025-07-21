@@ -2,10 +2,10 @@ import os
 
 
 class Config(object):
-    APPNAME = os.environ.get('APP_NAME', 'app')
+    APPNAME = os.environ.get('APP_NAME', '.')
     ROOT = os.path.abspath(APPNAME)
-    UPLOAD_PATH = os.environ.get('UPLOAD_PATH', 'static/uploads')
-    SERVER_PATH = os.path.join(ROOT, UPLOAD_PATH)
+    UPLOAD_PATH = os.environ.get('UPLOAD_PATH', '/app/static/uploads')
+    SERVER_PATH = UPLOAD_PATH
 
     USER = os.environ.get('DB_USERNAME')
     PASSWORD = os.environ.get('DB_PASSWORD')
