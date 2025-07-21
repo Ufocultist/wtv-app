@@ -45,15 +45,15 @@ jobs:
       snyk_scan: false
     secrets: inherit
 
-  eks-cd:
-    needs: wtv-ci
-    uses: ufocultist/wtv-cicd/.github/workflows/eks-cd.yml@feature/develop
-    with:
-      aws_account_id: 211125364139
-      cluster_name: wtv-cluster
-      nginx: false
-      mariadb: false
-      wtv: true
-      aws_ecr: wtvapp
-      image_tag: ${{ needs.python-ci.outputs.tag_version }}
-    secrets: inherit
+#  eks-cd:
+#    needs: wtv-ci
+#    uses: ufocultist/wtv-cicd/.github/workflows/eks-cd.yml@feature/develop
+#    with:
+#      aws_account_id: 211125364139
+#      cluster_name: wtv-cluster
+#      nginx: false
+#      mariadb: false
+#      wtv: true
+#      aws_ecr: wtvapp
+#      image_tag: ${{ needs.python-ci.outputs.tag_version }}
+#    secrets: inherit
