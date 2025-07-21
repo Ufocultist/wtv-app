@@ -4,7 +4,7 @@ import os
 class Config(object):
     APPNAME = os.environ.get('APP_NAME', 'app')
     ROOT = os.path.abspath(APPNAME)
-    UPLOAD_PATH = os.environ.get('UPLOAD_PATH', '/static/uploads')
+    UPLOAD_PATH = os.environ.get('UPLOAD_PATH', 'static/uploads')
     SERVER_PATH = os.path.join(ROOT, UPLOAD_PATH)
 
     USER = os.environ.get('DB_USERNAME')

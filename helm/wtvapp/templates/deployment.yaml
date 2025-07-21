@@ -33,9 +33,11 @@ spec:
               value: "{{ .Values.env.DB_PASSWORD }}"
             - name: SECRET_KEY
               value: "{{ .Values.env.SECRET_KEY }}"
+            - name: UPLOAD_PATH
+              value: "app/static/uploads"
           volumeMounts:
             - name: flask-storage
-              mountPath: /app/app/static/uploads
+              mountPath: /app/static/uploads
       volumes:
         - name: flask-storage
           persistentVolumeClaim:
