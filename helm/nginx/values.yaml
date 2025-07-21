@@ -6,5 +6,6 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: NodePort
-  nodePort: 30080
+  type: LoadBalancer
+#  type: NodePort
+#  nodePort: 30080
