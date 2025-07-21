@@ -14,6 +14,9 @@ pvc:
   name: flask-pvc
   size: 1Gi
 
+pv:
+  name: flask-local-pv
+
 service:
   name: flask
   type: ClusterIP
