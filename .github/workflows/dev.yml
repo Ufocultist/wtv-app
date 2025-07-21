@@ -51,9 +51,9 @@ jobs:
     with:
       aws_account_id: 211125364139
       cluster_name: wtv-cluster
-      nginx: true
+      nginx: false
       mariadb: false
-      wtv: true
+      wtv: false
       aws_ecr: wtvapp
       image_tag: ${{ needs.python-ci.outputs.tag_version }}
     secrets: inherit
