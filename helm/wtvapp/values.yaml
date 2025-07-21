@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: ufocultist/smotrish
+  tag: latest
+
+env:
+  DB_HOST: "mariadb-mariadb"
+  DB_NAME: "smotrish_db"
+  DB_USERNAME: "smotrish_user"
+  DB_PASSWORD: ""
+  SECRET_KEY: ""
+
+pvc:
+  name: flask-pvc
+  size: 1Gi
+
+pv:
+  enabled: true
+  name: flask-local-pv
+  storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  path: /mnt/data/flask
+
+service:
+  name: flask
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080

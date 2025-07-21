@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: mariadb
+  tag: latest
+  pullPolicy: IfNotPresent
+
+mariadb:
+  rootPassword: ""
+  database: "smotrish_db"
+  user: "smotrish_user"
+  password: ""
+  rootHost: "%"
+
+persistence:
+  enabled: true
+  size: 1Gi
+  accessMode: ReadWriteOnce
+  storageClass: gp2
+
+resources: {}
+
+nodeSelector:
+  kubernetes.io/arch: amd64
+
+createStorageClass: true

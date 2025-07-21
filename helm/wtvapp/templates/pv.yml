@@ -1,0 +1,15 @@
+{{- if .Values.pv.enabled }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.pv.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  capacity:
+    storage: {{ .Values.pv.storage }}
+  volumeMode: {{ .Values.pv.volumeMode }}
+  accessModes:
+{{ toYaml .Values.pv.accessModes | indent 4 }}
+  hostPath:
+    path: {{ .Values.pv.path }}
+{{- end }}
