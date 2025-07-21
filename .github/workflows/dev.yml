@@ -25,9 +25,7 @@ jobs:
       tag_release: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
       app_name: wtv # app name in Cloud
       app_file: wtv # artifact file name
-      #docker_repo: ufocultist
-      snyk_org: ufocultist-FPiwXFdC6zbfKornGL9YmJ
-      registry_type: ecr #, ecr - AWS, acr - Azure, gar - Google, Dockerhub - dockerhub
+      registry_type: ecr # ecr - AWS, acr - Azure, gar - Google, Dockerhub - dockerhub
       ###AWS###############
       aws_ecr: wtvapp
       aws_region: us-east-1
@@ -43,6 +41,8 @@ jobs:
       ###DOCKER###########
       docker_build: true # flag to build and publish the image
       snyk_scan: false
+      #docker_repo: ufocultist
+      #snyk_org: ufocultist-FPiwXFdC6zbfKornGL9YmJ
     secrets: inherit
 
 #  eks-cd:
