@@ -1,12 +1,12 @@
 
-# Welcome to your Web Python project!
+# Welcome to WTV Web Python project!
 
-This is a project for WTV development with Python.
+This is a sample project to deploy Python Flask Application into AWS EKS.
 
-This project consists of three repositories below.
+The project consists of three repositories below.
 
 ```
-(App) - https://github.com/Ufocultist/wtv-app - Application repository(Flask/Nginx/MardiaDb microservices)
+Current repo (App) - https://github.com/Ufocultist/wtv-app - Application repository(Flask/Nginx/MardiaDb microservices)
 (Infra) - https://github.com/Ufocultist/tf-infra-wtv - Terraform IAC repository(K8s standard mode)
 (CICD) - https://github.com/Ufocultist/wtv-cicd - CI/CD repository(Puthon-CI, EKS-CD)
 ```
@@ -15,7 +15,7 @@ Go to Infra repository first and complete all the steps there.
 After completing with Infra repository steps. Do steps below.
 
 Now you are going to Deploy containerized WTV web application using Helm charts to EKS cluster.
-1. Clone those repositories on your pc.
+1. Clone https://github.com/Ufocultist/wtv-app repository on your pc.
 2. Go to App repository. Create feature/develop branch from the main branch. Checkout to feature/develop branch.
 3. Go to AWS console -> IAM and generate Access keys. Save them to Notepad.
 4. Open Github Actions -> Settings -> Secrets and Variables -> Actions.
