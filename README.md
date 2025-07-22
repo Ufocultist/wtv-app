@@ -64,3 +64,6 @@ Now you are going to Deploy containerized WTV web application using Helm charts 
 ## Now you have running WTV application.
 
 Enjoy!
+
+## TODO
+1. Implement Bitnami Chart.
